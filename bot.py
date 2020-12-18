@@ -22,16 +22,17 @@ async def on_message(message):
     if message.content.startswith('/deposit') or message.content.startswith('/addr'):
 
         account = message.author.id
+        print(message.author)
         print(type(account))
-        address = getAddress(account)
+        address = getAddress(str(account))
 
         msg = '{0.author.mention}, your address is %s.'.format(message)%address
-        return await client.send_message(message.channel,msg)
+        await message.channel.send(msg)
 
     if message.content.startswith('/balance 0conf'): #0conf balance
         account = message.author.id
         balance = getBalance(account,0)
-        msg = '{0.author.mention}, you have %f DGB, including 0-confirmations.'.format(message)%balance
+        msg = '{0.author.mention}, you have %f YCE, including 0-confirmations.'.format(message)%balance
         return await client.send_message(message.channel,msg)
 
     if message.content.startswith('/balance'):
@@ -39,7 +40,7 @@ async def on_message(message):
         print(account)
         balance = getBalance(account)
         #price = getPrice(float(balance))
-        msg = '{0.author.mention}, you have %f DGB'.format(message)%(balance)
+        msg = '{0.author.mention}, you have %f YCE'.format(message)%(balance)
         return await client.send_message(message.channel,msg)
 
     if message.content.startswith('/tip '):
@@ -60,7 +61,7 @@ async def on_message(message):
         try:
             tip(tipper,toTip,amount)
             #price = getPrice(float(amount))
-            return await client.send_message(message.channel,"{0.author.mention} has tipped %s %f DGB.".format(message)%(toTipMention,amount))
+            return await client.send_message(message.channel,"{0.author.mention} has tipped %s %f YCE.".format(message)%(toTipMention,amount))
         except ValueError:
             return await client.send_message(message.channel,"{0.author.mention}, insufficient balance.".format(message))
 
@@ -89,7 +90,7 @@ async def on_message(message):
         amount = float(message.content.split()[1])
 
         if amount < 0.01:
-            return await client.send_message(message.channel,"{0.author.mention}, the amount must be bigger than 0.01 dgb.".format(message))
+            return await client.send_message(message.channel,"{0.author.mention}, the amount must be bigger than 0.01 YCE.".format(message))
         #catching errors again
         try:
             amount = float(amount)
@@ -105,7 +106,7 @@ async def on_message(message):
 
     if message.content.startswith('/donate'):
         account = message.author.id
-        address = "DRv2B21QDebJ96MEpzq6oCNkE1SY7msU2m"#DGB marketing donation account
+        address = "YCEMarketing"#YCE marketing donation account
         amount = message.content.split()[1]
 
         #catching errors
@@ -133,4 +134,4 @@ async def on_ready():
 
 
 
-client.run('Nzg4NDI0MjQxNDA2MTQ4NjA4.X9jTSw.iajrIO2pe-I049f9KkgocK10408')
+client.run('Nzg4NDI0MjQxNDA2MTQ4NjA4.X9jTSw.B-DGJ_Wzi1EAVPIC9qQwVfY5zFI')

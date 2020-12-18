@@ -3,9 +3,9 @@ from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 #from flask_jsonrpc.proxy import ServiceProxy
 
 rpc_username = 'myceuser'
-rpc_password = 'mypass'
+rpc_password = 'mypasss'
 rpc_ip = '127.0.0.1'
-rpc_port = 23511
+rpc_port = 23512
 
 
 #Make rpc connection with DGB core
@@ -25,7 +25,6 @@ def getAddress(account):
     account = rpc_connection.getaccountaddress(account)
     print(account)
 
-    print(account)
     return account
 
 def getBalance(account,minconf=1):
