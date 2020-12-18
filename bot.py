@@ -1,6 +1,9 @@
 import discord
 from tipper.tipper import *
+from dotenv import load_dotenv
 
+load_dotenv()
+TOKEN=os.getenv('DISCORD_TOKEN')
 client = discord.Client()
 
 
@@ -134,4 +137,4 @@ async def on_ready():
 
 
 
-client.run('Nzg4NDI0MjQxNDA2MTQ4NjA4.X9jTSw.B-DGJ_Wzi1EAVPIC9qQwVfY5zFI')
+client.run('TOKEN')
