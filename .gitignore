@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+coinMan-env/
 build/
 develop-eggs/
 dist/
