@@ -8,7 +8,7 @@ rpc_ip = '127.0.0.1'
 rpc_port = 23512
 
 
-#Make rpc connection with DGB core
+#Make rpc connection with YCE core
 def ServiceProxy():
     return AuthServiceProxy('http://%s:%s@%s:%i'%(rpc_username, rpc_password, rpc_ip, rpc_port))
 
@@ -23,14 +23,12 @@ def validateAddress(address):
 def getAddress(account):
     rpc_connection = ServiceProxy()
     account = rpc_connection.getaccountaddress(account)
-    print(account)
-
     return account
 
 def getBalance(account,minconf=1):
     rpc_connection = ServiceProxy()
     try:
-        balance = rpc_connection.getbalance(account,minconf)
+        balance = rpc_connection.getbalance(str(account),minconf)
     except ValueError:
         balance = -1
     return balance
@@ -64,7 +62,7 @@ def rain(account,amount):
 #API commands
 
 def getPrice():
-    api = requests.get('https://api.coinmarketcap.com/v1/ticker/digibyte/')
+    api = requests.get('https://api.coinmarketcap.com/v1/ticker/myce/')
     r = api.json()[0]
     price = float(r['price_usd'])
     price_btc = float(r['price_btc'])
@@ -75,7 +73,7 @@ def getPriceMSG():
 
     price, price_btc, r = getPrice()
 
-    msg = "1 DGB = %9.8lf BTC (%9.8lf USD)\nMarket Cap. = %12.2lf USD (Rank: %d)\nChange in USD: %4.2lf pt. (1H), %4.2lf pt. (24H), %4.2lf pt. (7D)" % \
+    msg = "1 YCE = %9.8lf BTC (%9.8lf USD)\nMarket Cap. = %12.2lf USD (Rank: %d)\nChange in USD: %4.2lf pt. (1H), %4.2lf pt. (24H), %4.2lf pt. (7D)" % \
             (float(r['price_btc']), float(r['price_usd']), float(r['market_cap_usd']), int(r['rank']),\
             float(r['percent_change_1h']), float(r['percent_change_24h']), float(r['percent_change_1h']))
 
